@@ -40,7 +40,7 @@ void AdicionarNome(char *nomes) {
     scanf("%79[^\n]s", nome);
     getchar();
 
-    nomes = realloc(nomes, strlen(nomes) + strlen(nome) + 1);
+    nomes = realloc(nomes, strlen(nomes) + strlen(nome) + 2);
     strcat(nomes, nome);
     strcat(nomes, "\n");
 }
@@ -52,7 +52,7 @@ void RemoverNome(char **nomes) {
     scanf("%79[^\n]s", nome);
     getchar();
 
-    char *removido = calloc(strlen(*nomes), sizeof(char));
+    char *removido = calloc(strlen(*nomes) + 2, sizeof(char));
     char *token = strtok(*nomes, "\n");
 
     while (token != NULL) {
