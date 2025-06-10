@@ -18,6 +18,7 @@ int main() {
     {
         printf("\n1 - Adicionar Pessoa\n2 - Remover Pessoa\n3 - Buscar Pessoa\n4 - Listar Todos\n5 - Sair\n");
         scanf("%d", option);
+        getchar(); // Remove trailing newline from stdout
         
         switch (*option) {
             case 1:
@@ -58,17 +59,20 @@ void AddContact(void **pBuffer, int *pBufferSize) {
 
     printf("\nDigite o nome do contato: ");
     char *name = (char*)*pBuffer + *currentOffset;
-    scanf("%s", name);
+    scanf("%99[^\n]s", name);
+    getchar(); // Remove trailing newline from stdout
     *currentOffset += strlen(name) + 1;
     
     printf("Digite a idade do contato: ");
     int *age = (int*)((char*)*pBuffer + *currentOffset);
     scanf("%d", age);
+    getchar(); // Remove trailing newline from stdout
     *currentOffset += sizeof(int);
 
     printf("Digite o email do contato: ");
     char *email = (char*)*pBuffer + *currentOffset;
-    scanf("%s", email);
+    scanf("%99[^\n]s", email);
+    getchar(); // Remove trailing newline from stdout
     *currentOffset += strlen(email) + 1;
 
     *pBufferSize = *currentOffset;
@@ -83,7 +87,8 @@ void RemoveContact(void **pBuffer, int *pBufferSize) {
 
     char *searchEmail = (char*)*pBuffer + *pBufferSize - 100 * sizeof(char);
     printf("\nEmail do contato a ser removido: ");
-    scanf("%s", searchEmail);
+    scanf("%99[^\n]s", searchEmail);
+    getchar(); // Remove trailing newline from stdout
 
     int *currentOffset = (int*)*pBuffer + 2;
     *currentOffset = 3 * sizeof(int);
@@ -121,7 +126,8 @@ void SearchContact(void **pBuffer, int *pBufferSize) {
 
     char *searchEmail = (char*)*pBuffer + *pBufferSize - 100 * sizeof(char);
     printf("\nEmail a ser buscado: ");
-    scanf("%s", searchEmail);
+    scanf("%99[^\n]s", searchEmail);
+    getchar(); // Remove trailing newline from stdout
 
     int *currentOffset = (int*)*pBuffer + 2;
     *currentOffset = 3 * sizeof(int);
